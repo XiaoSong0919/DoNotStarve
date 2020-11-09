@@ -101,7 +101,7 @@ namespace DoNotStarve
             }
             else if (Change == "Text")
             {
-                comboBox2.Text = text;
+                comboBox2.SelectedItem = text;
             }
             
         }
@@ -409,7 +409,7 @@ namespace DoNotStarve
                     textBox3.Text = dialog.SelectedPath + "/";
                     SavePath = dialog.SelectedPath + "/";
                     GetSavePath(dialog.SelectedPath);
-                    comboBox2.Text = "None";
+                    comboBox2.SelectedItem = "None";
                 }
                 else
                 {
@@ -423,14 +423,14 @@ namespace DoNotStarve
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.Text == "Steam")
+            if (comboBox1.SelectedItem.ToString() == "Steam")
             {
                 ServerMod = "Steam";
             }
             else
             {
                 MessageBox.Show("此模式暂未支持，请敬请期待！","十分抱歉！",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                comboBox1.Text = "Steam";
+                comboBox1.SelectedItem = "Steam";
                 ServerMod = "Steam";
                 //comboBox1.Items.Add("23333333");
             }
@@ -455,20 +455,9 @@ namespace DoNotStarve
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox2.Text == "None")
+            if (comboBox2.SelectedItem.ToString() != "None")
             {
-
-            }
-           else 
-            {
-                checkfile();                           
-             }
-            if (comboBox2.Text == "None")
-            {
-
-            }
-            else
-            {
+                checkfile();
                 if (Masteristrue == false || Modistrue == false || Levelistrue == false || Serveriniistrue == false)
                 {
                     DialogResult = MessageBox.Show("检测到存档缺少相关的配置文件，是否添加？", "错误", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
@@ -481,18 +470,18 @@ namespace DoNotStarve
                         DialogResult = MessageBox.Show("是否继续以此存档运行？", "错误", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                         if (DialogResult == DialogResult.OK)
                         {
-                            ClusterName = comboBox2.Text;//设置指定存档
+                            ClusterName = comboBox2.SelectedItem.ToString();//设置指定存档
                             ClusterPath = SavePath + ClusterName + "/";
                         }
                         else
                         {
-                            comboBox2.Text = "None";
+                            comboBox2.SelectedItem = "None";
                         }
                     }
                 }
                 else
                 {
-                    ClusterName = comboBox2.Text;//设置指定存档
+                    ClusterName = comboBox2.SelectedItem.ToString();//设置指定存档
                     ClusterPath = SavePath + ClusterName + "/";
                     //Serchtxt("Master/server.ini", "");
                 }
@@ -513,34 +502,43 @@ namespace DoNotStarve
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //MessageBox.Show(comboBox2.SelectedItem.ToString());
+            if (comboBox2.SelectedItem.ToString() != "None")
+            {
 
 
-            checkfile();
+
+                checkfile();
                 if (Masteristrue == false || Modistrue == false || Levelistrue == false || Serveriniistrue == false)
                 {
                     DialogResult = MessageBox.Show("检测到存档缺少相关的配置文件，是否添加？", "错误", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                     if (DialogResult == DialogResult.OK)
                     {
-                    fixfile();
+                        fixfile();
                     }
                     else
                     {
                         DialogResult = MessageBox.Show("是否继续以此存档运行？", "错误", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                         if (DialogResult == DialogResult.OK)
                         {
-                            ClusterName = comboBox2.Text;//设置指定存档
+                            ClusterName = comboBox2.SelectedItem.ToString();//设置指定存档
                             ClusterPath = SavePath + ClusterName + "/";
                         }
                         else
                         {
-                            comboBox2.Text = "None";
+                            comboBox2.SelectedItem = "None";
                         }
                     }
                 }
                 else
-            {
-                DialogResult = MessageBox.Show("暂无发现缺少的文件", "通过", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                {
+                    DialogResult = MessageBox.Show("暂无发现缺少的文件", "通过", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 
+                }
+            }
+            else
+            {
+                MessageBox.Show("您还没有选择存档！","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
 
 
@@ -548,7 +546,7 @@ namespace DoNotStarve
 
         private void button11_Click(object sender, EventArgs e)
         {
-            if (comboBox2.Text == "None")
+            if (comboBox2.SelectedItem.ToString() == "None")
             {
                 MessageBox.Show("您还没有选择存档！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -567,7 +565,7 @@ namespace DoNotStarve
                             {
                                 MessageBox.Show("已删除名为\"" + ClusterName + "\"的存档", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 comboBox2.Items.Remove(ClusterName);
-                                comboBox2.Text = "None";
+                                comboBox2.SelectedItem = "None";
                                 ClusterPath = "";
                                 ClusterName = "";
                             }
