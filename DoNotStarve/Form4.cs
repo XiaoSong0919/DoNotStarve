@@ -32,6 +32,7 @@ namespace DoNotStarve
         public static string master_port;
         public static string cluster_key;
         public static string answer;
+        public static string save_code = "[GAMEPLAY] \n game_mode=survival \n max_players= 6 \n pvp = false \n pause_when_empty = true \n \n \n [NETWORK] \n lan_only_cluster = true \n cluster_intention = cooperative \n cluster_password = \n cluster_description = \n cluster_name = MR.Wilson's' World \n offline_cluster = true \n cluster_language = en \n \n \n[MISC] \n console_enabled = true \n \n \n [SHARD] \n shard_enabled = true \n bind_ip = 127.0.0.1 \n master_ip = 127.0.0.1 \n master_port = 10888 \n cluster_key = defaultPass";
         public Form4()
         {
             InitializeComponent();
@@ -85,11 +86,11 @@ namespace DoNotStarve
                 pvp = answer;
                 if (pvp == "true")
                 {
-                    comboBox3.Text = "开启";
+                    comboBox3.SelectedItem = "开启";
                 }
                 else
                 {
-                    comboBox3.Text = "关闭";
+                    comboBox3.SelectedItem = "关闭";
                 }
                 //-----------------------------------------pvp
                 Serchtxt("cluster.ini", "pause_when_empty");
@@ -99,11 +100,11 @@ namespace DoNotStarve
                 pause_when_empty = answer;
                 if (pause_when_empty == "true")
                 {
-                    comboBox2.Text = "开启";
+                    comboBox2.SelectedItem = "开启";
                 }
                 else
                 {
-                    comboBox2.Text = "关闭";
+                    comboBox2.SelectedItem = "关闭";
                 }
                 //-----------------------------------------pause_when_empty
                 Serchtxt("cluster.ini", "lan_only_cluster");
@@ -114,6 +115,7 @@ namespace DoNotStarve
                 if (lan_only_cluster == "true")
                 {
                     checkBox2.Checked = true;
+                    checkBox2.Checked.ToString();
                 }
                 else
                 {
@@ -127,19 +129,19 @@ namespace DoNotStarve
                 cluster_intention = answer;
                 if (cluster_intention == "cooperative")
                 {
-                    comboBox5.Text = "合作";
+                    comboBox5.SelectedItem = "合作";
                 }
                 else if(cluster_intention == "competitive")
                 {
-                    comboBox5.Text = "竞争";
+                    comboBox5.SelectedItem = "竞争";
                 }
                 else if (cluster_intention == "social")
                 {
-                    comboBox5.Text = "交际";
+                    comboBox5.SelectedItem = "交际";
                 }
                 else if (cluster_intention == "madness")
                 {
-                    comboBox5.Text = "疯狂";
+                    comboBox5.SelectedItem = "疯狂";
                 }
                 //-----------------------------------------cluster_intention
                 Serchtxt("cluster.ini", "cluster_password");
@@ -196,11 +198,11 @@ namespace DoNotStarve
                 shard_enabled = answer;
                 if (shard_enabled == "true")
                 {
-                    comboBox4.Text = "开启";
+                    comboBox4.SelectedItem = "开启";
                 }
                 else
                 {
-                    comboBox4.Text = "关闭";
+                    comboBox4.SelectedItem = "关闭";
                 }
                 //-----------------------------------------shard_enabled
                 Serchtxt("cluster.ini", "bind_ip");
@@ -287,6 +289,16 @@ namespace DoNotStarve
         private void comboBox6_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
