@@ -14,6 +14,7 @@ namespace DoNotStarve
 {
     public partial class Form4 : Form
     {
+        Form1 f1 = new Form1();
         public static string game_mode;
         public static string max_players;
         public static string pvp;
@@ -32,7 +33,6 @@ namespace DoNotStarve
         public static string master_port;
         public static string cluster_key;
         public static string answer;
-        public static string save_code = "[GAMEPLAY] \n game_mode=survival \n max_players= 6 \n pvp = false \n pause_when_empty = true \n \n \n [NETWORK] \n lan_only_cluster = true \n cluster_intention = cooperative \n cluster_password = \n cluster_description = \n cluster_name = MR.Wilson's' World \n offline_cluster = true \n cluster_language = en \n \n \n[MISC] \n console_enabled = true \n \n \n [SHARD] \n shard_enabled = true \n bind_ip = 127.0.0.1 \n master_ip = 127.0.0.1 \n master_port = 10888 \n cluster_key = defaultPass";
         public Form4()
         {
             InitializeComponent();
@@ -61,15 +61,15 @@ namespace DoNotStarve
                 game_mode = answer;
                 if (game_mode == "endless")
                 {
-                    comboBox1.Text = "无尽";
+                    comboBox1.SelectedItem = "无尽";
                 }
                 else if (game_mode == "survival")
                 {
-                    comboBox1.Text = "生存";
+                    comboBox1.SelectedItem = "生存";
                 }
                 else if (game_mode == "wilderness")
                 {
-                    comboBox1.Text = "荒野";
+                    comboBox1.SelectedItem = "荒野";
                 }
                 //-----------------------------------------game mode
                 Serchtxt("cluster.ini", "max_players");
@@ -115,7 +115,7 @@ namespace DoNotStarve
                 if (lan_only_cluster == "true")
                 {
                     checkBox2.Checked = true;
-                    checkBox2.Checked.ToString();
+                    //checkBox2.Checked.ToString();
                 }
                 else
                 {
@@ -293,7 +293,65 @@ namespace DoNotStarve
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (comboBox4.SelectedItem.ToString() == "开启")
+            {
+                shard_enabled = "true";
+            }
+            else
+            {
+                shard_enabled = "false";
+            }
 
+            if (comboBox5.SelectedItem.ToString() == "合作")
+            {
+                cluster_intention = "cooperative";
+            }
+            else if (comboBox5.SelectedItem.ToString() == "竞争")
+            {
+                cluster_intention = "competitive";
+            }
+            else if (comboBox5.SelectedItem.ToString() == "交际")
+            {
+                cluster_intention = "social";
+            }
+            else if (comboBox5.SelectedItem.ToString() == "疯狂")
+            {
+                cluster_intention = "madness";
+            }
+
+            if (comboBox2.SelectedItem.ToString() == "开启")
+            {
+                pause_when_empty = "true";
+            }
+            else
+            {
+                pause_when_empty = "false";
+            }
+
+            if (comboBox3.SelectedItem.ToString() == "开启")
+            {
+                pvp = "true";
+            }
+            else
+            {
+                pvp = "false";
+            }
+
+            if (comboBox1.SelectedItem.ToString() == "无尽")
+            {
+                game_mode = "endless";
+            }
+            else if (comboBox1.SelectedItem.ToString() == "生存")
+            {
+                game_mode = "survival";
+            }
+            else if (comboBox1.SelectedItem.ToString() == "荒野")
+            {
+                game_mode = "wilderness";
+            }
+            string save_code = "[GAMEPLAY] \n game_mode= " + game_mode + "\n max_players= " + textBox1.Text + " \n pvp = " + pvp + " \n pause_when_empty = " + pause_when_empty + " \n \n \n [NETWORK] \n lan_only_cluster = " + checkBox2.Checked.ToString() + " \n cluster_intention = " + cluster_intention + " \n cluster_password = " + textBox16.Text + "\n cluster_description = " + textBox15.Text + "\n cluster_name = " + textBox14.Text + " \n offline_cluster = " + checkBox3.Checked.ToString() + " \n cluster_language = en \n \n \n[MISC] \n console_enabled = true \n \n \n [SHARD] \n shard_enabled = " + shard_enabled + " \n bind_ip = " + textBox10.Text + " \n master_ip = " + textBox11.Text + " \n master_port = " + textBox12.Text + " \n cluster_key = " + textBox13.Text;
+            f1.writetxt(save_code, "cluster.ini", false);
+            this.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)

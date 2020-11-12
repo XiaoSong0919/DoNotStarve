@@ -280,6 +280,15 @@ namespace DoNotStarve
             sw.Close();
             fs1.Close();
         }
+
+        public void writetxt(string txt, string filename, bool add)//追加写入txt，类型string;add为true时，追加写入,add为false时，覆盖写入
+        {
+            //deletetxt(filename);
+            String appDir = Form1.ClusterPath + filename;
+            StreamWriter sw = new StreamWriter(appDir, add);
+            sw.WriteLine(txt);
+            sw.Close();
+        }
         //----------------------------------------函数区域结束---------------------------------------------------
         //=======================================================================================================
         //=======================================================================================================
